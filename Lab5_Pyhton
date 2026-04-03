@@ -1,0 +1,49 @@
+#Q1 and Q2 solutions
+
+def factorial(x):
+    if x == 0 or x == 1:
+        return 1
+    return x * factorial(x - 1)
+
+
+term = lambda x, i: abs(((-1) ** i) * (x ** (2 * i)) / factorial(2 * i))
+
+
+def exp_x(x, n):
+    result = 0
+    for i in range(n):
+        result += term(x, i)
+    return result
+
+
+x = float(input("Please enter x value: "))
+n = int(input("Please enter n: "))
+
+print(f"S = {exp_x(x, n)}")
+
+# Q3 Solution
+
+total = 0
+"""
+--if n = 0, then add 1 to global variable total and return
+--call compute_gn to calculate previous terms
+--then add (r**n) to total 
+
+"""
+
+
+def compute_gn(n, r):
+    global total
+    if n == 0:
+        total += 1
+        return
+    compute_gn(n - 1, r)
+    total += r ** n
+
+
+n = int(input("Please enter n: "))
+r = float(input("Please enter r: "))
+
+compute_gn(n, r)
+
+print(f"G{n} = {total}")
